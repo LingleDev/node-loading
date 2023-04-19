@@ -3,6 +3,7 @@
 const whatype = require('whatype');
 const signalExit = require('signal-exit');
 const childProcess = require('child_process');
+const cursor = require('get-cursor-pos')
 
 const CONSOLE_WIDTH = process.stdout.columns;
 let isCursorVisible = true;
@@ -63,7 +64,9 @@ const determinateLoadingInit = (context) => {
 };
 
 const getCursorPosition = () => {
-  return JSON.parse(childProcess.execSync('./src/get-cursor-position.sh').toString());
+  let { row, col } = cursor.sync();
+  
+  return { row, col } 
 };
 
 
